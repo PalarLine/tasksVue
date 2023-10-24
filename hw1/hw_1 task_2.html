@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    img {
+      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .show_picture {
+      width: 250px;
+    }
+  </style>
+  <title>Task 2</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <label>
+        Enter a month number from 1 to 12
+        <input type="number" v-model.lazy="enteredMonthNumber" min="1" max="12" />
+      </label>
+    </div>
+    <div>
+      The season is:
+      <span> {{ theSeasonIs }} </span>
+    </div>
+    <div>
+      Our recomendations:
+      <span>{{ theRecomendationIs }}</span>
+    </div>
+    <div class="show_picture">
+      Picture:
+      <img :src="thePictureIs">
+
+    </div>
+  </div>
+
+  <script>
+    //Вводиться номер місяця. Автоматично виводити рекомендований одяг (зима – пальто, літо – шорти ….). Також автоматично
+    //  виводити зображення з відповідним зображенням лісу(зима – ліс зі снігом, осінь – жовтий ліс, …).
+    const { createApp } = Vue
+    const seasonsList = [
+      winter = {
+        monthNumber: [1, 2, 12],
+        monthName: "winter",
+        recommended: "Take skis and a winter cap",
+        img: './img/winter.jpg',
+      },
+      spring = {
+        monthNumber: [3, 4, 5],
+        monthName: "spring",
+        recommended: "Take a good mood and vacation",
+        img: './img/spring.jpg',
+      },
+      summer = {
+        monthNumber: [6, 7, 8],
+        monthName: "summer",
+        recommended: "Take a sunglasses and swimsuit",
+        img: './img/summer.jpg',
+      },
+      fall = {
+        monthNumber: [9, 10, 11],
+        monthName: "fall",
+        recommended: "Make sure you take an umbrella",
+        img: './img/fall.jpg',
+      },
+    ]
+
+    const app = createApp({
+      data() {
+        return {
+          enteredMonthNumber: null,
+        }
+      },
+
+      computed: {
+        theSeasonIs() {
+          for (const item of seasonsList)
+            if (item.monthNumber.includes(this.enteredMonthNumber))
+              return item.monthName
+        },
+        theRecomendationIs() {
+          for (const item of seasonsList)
+            if (item.monthNumber.includes(this.enteredMonthNumber))
+              return item.recommended
+        },
+        thePictureIs() {
+          for (const item of seasonsList)
+            if (item.monthNumber.includes(this.enteredMonthNumber))
+              return item.img
+
+        },
+      },
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

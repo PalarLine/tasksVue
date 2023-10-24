@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Task 5</title>
+    <style>
+        * {
+            box-sizing: border-box;
+
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 12px;
+            margin: 5px;
+            margin-bottom: 0;
+        }
+
+        a:hover {
+            color: blue;
+            text-decoration: blue;
+            text-decoration: underline;
+        }
+
+        span {
+            font-size: 14px;
+        }
+
+        h2,
+        h5 {
+            margin: 3px 0;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin: 25px 0;
+        }
+
+        .subheader {
+            display: flex;
+            justify-content: start;
+        }
+
+        .sub_subheader {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .icon {
+            margin: 10px 10px 10px 0;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Задача 5. Самостійно сформуйте масив даних та виведіть фрагмент на зразок поданого (дані не обов’язково повинні
+    співпадати) -->
+    <div id="app">
+        <div>
+            <div class="header" v-for="(item, index) in searchListItems" :key="index">
+                <div class="subheader">
+                    <div class="icon">
+                        <a :href="item.link"><img :src="item.icon"></a>
+                    </div>
+                    <div class="sub_subheader">
+                        <a :href="item.link"><span>{{ item.title }}</span></a>
+
+                        <a :href="item.link">{{ item.link }}</a>
+
+                    </div>
+
+                </div>
+                <div class="sub_subheader">
+                    <a href="">
+                        <h2>{{ item.headline }}</h2>
+                    </a>
+
+                    <h5>{{ item.text }}</h5>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script>
+        const { createApp } = Vue
+        const searchList = [
+            {
+                title: "Хабр Q & A",
+                icon: "./image/habr.png",
+                link: "https://qna.habr.com/q/807761",
+                headline: "Пример крупного проекта на Vue.js ? - Хабр Q & A",
+                text: "9 июл. 2020 г.— Пожалуйста, скиньте ссылку на какое - нибудь крупное приложение(не todo), написанное на Vue, чтобы можно было покопаться в коде, …",
+            },
+            {
+                title: "Brander.ua",
+                icon: "./image/brander.png",
+                link: "https://brander.ua/ru/what-we-offer/web-development/razrabotka-saytov-na-vuejs",
+                headline: " Разработка сайтов на Vue.js",
+                text: "Создание сайтов на VUE JS под ключ ✓ Создаем сайты для бизнеса ✓ 11 лет успешной работы ✓ Более 1000 кейсов ✓ Разработка сайтов на VUE JS от лучших..",
+            },
+            {
+                title: "Vue.js",
+                icon: "./image/vuejs.png",
+                link: "https://ru.vuejs.org/v2/cookbook/serverless-blog.html",
+                headline: "Создание блога, управляемого CMS",
+                text: "Итак, вы только что запустили свой веб - сайт на Vue.js, поздравляем! Теперь вы хотите добавить блог, который быстро встраивается на ваш сайт и вы не хотите ...",
+            },
+            {
+                title: " Спільнота програмістів",
+                icon: "./image/dou.png",
+                link: " https://dou.ua/lenta/columns/from-react-to-vuejs/",
+                headline: "Почему Vue.js — отличный выбор для веб - проектов и.",
+                text: "21 янв. 2021 г.— Материал будет полезен всем, кто интересуется фреймворком Vue.js, заботится о производительности своего сайта и хочет сделать взаимодействие.."
+            },
+        ]
+        const app = createApp({
+            data() {
+                return {
+
+                }
+            },
+            computed: {
+                searchListItems() {
+                    return searchList
+                }
+            },
+
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>

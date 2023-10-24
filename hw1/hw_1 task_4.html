@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Task 4</title>
+  <style>
+    .isWithdraw,
+    .isLessThan_100 {
+      color: red;
+    }
+
+    .isAdd,
+    .isMoreThan_100 {
+      color: green;
+    }
+  </style>
+</head>
+<!-- Задача 4. “Рахунок у банку”
+Вимоги:
+1) Спочатку сума дорівнює 0грн. Змінити суму у гривнях можна або зарахуванням на рахунок, або зняттям.
+2) Сума автоматично переводиться у долари та євро (фіксований курс задається у data).
+3) можливість зарахувати суму (контролювати, щоб не була від’ємною)
+4) можливість зняти (щоб не можна зняти більше ніж є на рахунку)
+5) при виконанні зняття і зарахування коштів вираховувати 3% від суми (відображати кількість відсотків автоматично)
+
+При зміні суми :
+- якщо було зняття, то суму відоражати червоним
+- якщо було зарахування, то суму відображати зеленим
+Якщо сума валюти менша за 100 то відображати червоним кольором, інакше - зеленим -->
+
+<body>
+  <div id="app">
+    <div>
+      Balance:
+      <span :class="curretnStatusBalanceClass"> {{ balance }} hrn</span>
+    </div>
+    <div>
+      <label> Add money to account
+        <input type="number" v-model="addMoney" @focus="onFocus">
+        <button @click="onAdd">ADD MONEY</button>
+      </label>
+    </div>
+    <div>
+      <label> Withdraw money from account
+        <input type="number" v-model="withdrawMoney" @focus="onFocus">
+        <button @click="onWithdraw">WITHDRAW MONEY</button>
+      </label>
+    </div>
+    <div>
+      <span>TAX VALUE: {{ lableTaxValue }}</span>
+    </div>
+    <hr>
+    <div>
+      Balance in DOLLAR <span :class="currentStatusDollarClass"> {{ dollarValue }} </span>
+    </div>
+    <div>
+      Balance in EURO <span :class="currentStatusEuroClass"> {{ euroValue }} </span>
+    </div>
+    <hr>
+    <div> {{ message}} </div>
+
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    const TAXRATE = 3
+    const DOLLAR_RATE = 38
+    const EURO_RATE = 40
+
+    createApp({
+      data() {
+        return {
+          balance: 0,
+          addMoney: null,
+          withdrawMoney: null,
+          message: null,
+        }
+      },
+      computed: {
+        getTaxValue() {
+          return (this.addMoney * TAXRATE / 100) + (this.withdrawMoney * TAXRATE / 100)
+        },
+        lableTaxValue() {
+          return this.getTaxValue.toFixed(2)
+        },
+        dollarValue() {
+          return (this.balance / DOLLAR_RATE).toFixed(2)
+        },
+        euroValue() {
+          return (this.balance / EURO_RATE).toFixed(2)
+        },
+        currentStatusDollarClass() {
+          let currentDollarClass = null
+          return this.dollarValue < 100
+            ? currentDollarClass = "isLessThan_100"
+            : currentDollarClass = "isMoreThan_100"
+        },
+        currentStatusEuroClass() {
+          let currentEuroClass = null
+          return this.euroValue < 100
+            ? currentEuroClass = "isLessThan_100"
+            : currentEuroClass = "isMoreThan_100"
+        },
+        curretnStatusBalanceClass() {
+          let currentBalanceClass = null
+          if (this.withdrawMoney > 0) {
+            return currentBalanceClass = 'isWithdraw'
+          } else
+            if (this.addMoney > 0) {
+              return currentBalanceClass = 'isAdd'
+            }
+
+        }
+      },
+      methods: {
+        onAdd() {
+          if (this.addMoney < 0) {
+            this.message = "Invalid value to add. Enter a value greater than zero"
+            return
+          }
+          this.balance += this.addMoney - this.getTaxValue
+          this.addMoney = null
+        },
+        onWithdraw() {
+          if (this.withdrawMoney + this.getTaxValue > this.balance) {
+            this.message = "not enough money in the account"
+            return
+          }
+          this.balance -= this.withdrawMoney + this.getTaxValue
+          this.withdrawMoney = null
+        },
+        onFocus() {
+          this.message = null
+          this.addMoney = null
+          this.withdrawMoney = null
+        }
+      },
+
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Task 1</title>
+    <style>
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px 0;
+        }
+
+        img {
+            width: 100px;
+        }
+
+        .blueText {
+            color: blue;
+        }
+
+        .redText {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Задача 1. Вводимо логіна і пароль. Якщо логін вірний відображаємо смайл. Якщо ні, то:
+    1) якщо логін = Іван – колір повідомлення про помилку синій
+    2) якщо хтось інший, то колір повідомлення червоний -->
+    <div id="app" class="parent">
+        <div class="child">
+            <div>
+                <label>
+                    Enter User Login:
+                    <input type="text" v-model.trim="login" @focus="onFocus">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Enter Password:
+                    <input type=" text" v-model.trim="password" @focus="onFocus">
+                </label>
+            </div>
+            <div>
+                <button @click="showMessage">GO!</button>
+            </div>
+
+            <template v-if="isMessageVisible">
+                <div v-if="message">
+                    <img src="./image/smile.png" />
+                </div>
+                <div v-else :class="{'blueText' : isIvanStatusColor,
+                                        'redText' : !isIvanStatusColor}">
+                    Incorrect Login!
+                </div>
+            </template>
+
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue
+        const usersList = [
+            {
+                login: "user1",
+                password: "password1"
+            },
+            {
+                login: "user2",
+                password: "password2"
+            },
+            {
+                login: "user3",
+                password: "password3"
+            },
+            {
+                login: "user4",
+                password: "password4"
+            },
+            {
+                login: "uz",
+                password: "pas"
+            },
+
+        ]
+
+
+        const app = createApp({
+            data() {
+                return {
+                    login: null,
+                    password: null,
+                    message: null,
+                }
+            },
+            computed: {
+
+                isMessageVisible() {
+                    return this.message != null
+                },
+
+                isIvanStatusColor() {
+                    if (this.login !== null)
+                        return this.login.toLocaleUpperCase() === "IVAN"
+                },
+            },
+            methods: {
+
+                isLoginValid() {
+                    const enteredLogin = this.login.toUpperCase()
+                    return usersList.some(
+                        (user) =>
+                            user.login.toLocaleUpperCase() === enteredLogin &&
+                            user.password === this.password
+                    )
+                },
+                onFocus() {
+                    this.message = null
+
+                },
+
+                showMessage() {
+                    if (this.isLoginValid() === true) {
+                        this.message = true
+                    } else this.message = false
+                },
+
+            },
+
+        }).mount('#app')
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <title>Task 2</title>
+    <style>
+        body {
+            height: 100vh;
+            background: url(image/cloud_plane.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            max-width: 50vw;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .closeMenu {
+            display: none;
+        }
+
+        .showMenu {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Задача 2. З випадаючого списку вибираємо клас квитка у літаку. Якщо
+    1) бізнес - виводимо елементи для вибору газети та коньяку (якщо вибрано коньяк, то запропонувати закуску (так/ні)), на
+    фоні зображення бізнес кают
+    2) економ – виводимо елементи для вибору типу пива і чипсів, на фоні хмарки. -->
+    <div id="app">
+
+        <div class="wrapper"> Take a choice:
+            <div>
+                <select v-model="ticketClass">
+                    <option value="no"></option>
+                    <option value="business">Business</option>
+                    <option value="economy">Economy</option>
+                </select>
+            </div>
+            <div :class="statusTicketClass">
+                <div v-if="ticketClass === 'business'">
+                    <h2>Business class</h2>
+                    <label>Newspaper: <input type="checkbox" v-model="newspaper" /></label><br>
+                    <label>Cognac: <input type="checkbox" v-model="cognac" /></label><br>
+                    <template v-if="cognac">
+                        Snack:
+                        <label>Yes<input name="sneck" type="radio" v-model="snack" @click="onClick" /></label>
+                        <label>No<input name="sneck" type="radio" v-model="snack" /></label>
+                    </template>
+                    <div><img src="./image/business.jpg" alt="Business Class"></div>
+                </div>
+                <div v-else>
+                    <h2>Economy class</h2>
+                    <label>Beer: <input type="checkbox" v-model="beer" /></label><br>
+                    <label>Chips: <input type="checkbox" v-model="chips" /></label><br>
+                    <div><img src="./image/beer and chips.jpg" alt="Clouds"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        ticketClass: "no",
+                        newspaper: false,
+                        cognac: false,
+                        snack: "on",
+                        beer: false,
+                        chips: false,
+                    }
+                },
+                computed: {
+                    statusTicketClass() {
+                        let currentClassStyle
+                        if (this.ticketClass === "no")
+                            return currentClassStyle = "closeMenu"
+                        else return currentClassStyle = "showMenu"
+
+                    }
+                },
+
+            }).mount('#app')
+        </script>
+
+</body>
+
+</html>
