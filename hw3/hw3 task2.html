@@ -95,7 +95,7 @@
                 <h2>список</h2>
                 <div>
                     <div v-if="filterModelsList.length">
-                        <div class="cars_list" v-for="car in filterModelsList">
+                        <div class="cars_list" v-for="(car, id) in filterModelsList" :key="car.id">
                             {{ car.model }} -
                             {{ car.yearOfManufacture }}р. -
                             {{ car.price }}$
