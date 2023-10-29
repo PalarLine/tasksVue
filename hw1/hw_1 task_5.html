@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Task 5</title>
+</head>
+<!-- Задача 5. Додаток містить масив об’єктів (логін, пароль) -- інсуючі логіни і паролі. Користувач вводить логін і пароль,
+  а програма повідомляє чи може користувач бути авторизованим (чи є він одним з масиву). -->
+
+<body>
+  <div id="app">
+    <div>
+      <label>
+        Enter the Login:
+        <input type="text" @focus="onFocus" v-model.trim="userLogin">
+      </label>
+    </div>
+    <div>
+      <label>
+        Enter the Password:
+        <input type="text" @focus="onFocus" v-model.trim="userPassword">
+      </label>
+    </div>
+    <div>
+
+      <button @click="showMessage"> GO! </button>
+
+      <template v-if="isMessageVisible">
+        <div v-if="message">WELCOME!</div>
+        <div v-else>Invalid Login or Password</div>
+      </template>
+
+
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    const usersList = [
+      { login: "ADMIN", password: "ADMINPASS" },
+      { login: "olga", password: "olgapass" },
+      { login: "victor", password: "victorpass" },
+      { login: "ivan", password: "ivanpass" },
+      { login: "a", password: "a" },
+    ]
+    const app = createApp({
+
+      data() {
+        return {
+          userLogin: null,
+          userPassword: null,
+          message: null,
+          // messageLogin: null,
+          // messagePassword: null,
+          isEnteredDataValid: null
+
+        }
+      },
+
+      computed: {
+        isMessageVisible() {
+          return this.message !== null
+
+        }
+      },
+
+      methods: {
+        isDataValid() {
+
+          const enteredLogin = this.userLogin.toUpperCase()
+          return usersList.some(
+            (user) =>
+              user.login.toUpperCase() === enteredLogin &&
+              user.password === this.userPassword
+          )
+        },
+
+        showMessage() {
+          //this.isEnteredDataValid = this.isDataValid()
+          if (this.isDataValid())
+            //&& this.isPasswordValid())
+            this.message = true
+          else this.message = false
+          //else this.message = false
+
+        },
+        onFocus() {
+
+          this.message = null
+        }
+      },
+
+
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

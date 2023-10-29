@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Task 1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        span {
+            align-items: center;
+        }
+
+        .container {
+            margin: 10px auto;
+            width: 50vw;
+            min-width: 530px;
+            border: 2px solid blue;
+        }
+
+        .section1,
+        .section2,
+        .section3 {
+            margin: 20px;
+            display: flex;
+        }
+
+        .section1 {
+            justify-content: space-between;
+
+        }
+
+        .section2 {
+            justify-content: center;
+        }
+
+        .section3 {
+            justify-content: start;
+        }
+
+        .boys,
+        .girls,
+        .chosen {
+            border: 2px solid red;
+            margin: 15px;
+            width: 150px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .addButton {
+
+            border: 2px solid red;
+
+        }
+
+        .selected {
+            border: 2px solid blue;
+        }
+
+
+        input[type="radio"] {
+            display: none;
+
+        }
+
+        label:hover {
+            cursor: pointer;
+        }
+
+        label input[type="radio"]:checked {
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Задача 6. Пари для танців. Поступово вибираємо хлопця, дівчину і додаємо у обрані пари. Пару можна видалити.
+        Поки не
+        вибрано хлопця і дівчину кнопка «Додати» заблокована. Якщо не вистачає хлопців або дівчат вибір також
+        блокується.
+    </div>
+    <hr>
+    <div id="app">
+        <div class="container">
+            <div class="section1">
+                <div class="label">
+                    <span>Хлопці</span>
+                    <div class=" boys">
+                        <template v-for="(boy, key) in boysList" :key="boy.id">
+                            <label>
+                                {{ boy.name }}
+                                <input type="radio" :value="boy" v-model="selectedBoy">
+                            </label><br>
+                        </template>
+                    </div>
+                </div>
+                <div class="label">
+                    <span>Дівчата</span>
+                    <div class="girls">
+                        <template v-for="(girl, key) in girlsList" :key="girl.id">
+                            <label>
+                                {{ girl.name }}
+                                <input type="radio" :value="girl" v-model="selectedGirl">
+                            </label>
+                            <br>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section2">
+            <button class="addButton" :disabled="!isButtonStatusActive" @click="toAddCouple">Додати</button>
+        </div>
+        <div class="section3">
+            <div class="label">
+                <span>Обрані пари</span>
+                <div class="chosen">
+                    <template v-for="(couple, key) in selectedCouples" :key="couple.key">
+                        <div>
+                            {{ couple.boy.name }} - {{ couple.girl.name }}
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script>
+        const { createApp } = Vue
+        const app = createApp({
+            data() {
+                return {
+                    buttonStatus: null,
+                    selectedBoy: null,
+                    selectedGirl: null,
+                    selectedCouples: [],
+                    girlsList: [
+                        {
+                            id: 1,
+                            name: 'Olga',
+
+                        },
+                        {
+                            id: 2,
+                            name: 'Maria',
+
+                        },
+                        {
+                            id: 3,
+                            name: 'Hanna',
+
+                        },
+                        {
+                            id: 4,
+                            name: 'Liza',
+
+                        },
+                    ],
+                    boysList: [
+                        {
+                            id: 1,
+                            name: 'Ivan',
+
+                        },
+                        {
+                            id: 2,
+                            name: 'Stepan',
+
+                        },
+                        {
+                            id: 3,
+                            name: 'Andrew',
+
+                        },
+                        {
+                            id: 4,
+                            name: 'Oleg',
+
+                        },
+                        {
+                            id: 5,
+                            name: 'Petr',
+
+                        },
+                    ]
+
+                }
+            },
+
+            computed: {
+                isButtonStatusActive() {
+                    if ((this.boysList.length && this.girlsList.length)
+                        &&
+                        (this.selectedBoy !== null && this.selectedGirl !== null))
+                        return this.buttonStatus = true
+                },
+            },
+            methods: {
+                toAddCouple() {
+                    this.selectedCouples.push({ boy: this.selectedBoy, girl: this.selectedGirl })
+
+
+                    const idToDeleteBoy = this.selectedBoy.id
+                    this.boysList.forEach((el, i) => {
+                        if (el.id === idToDeleteBoy) this.boysList.splice(i, 1)
+                    })
+                    const idToDeleteGirl = this.selectedGirl.id
+                    this.girlsList.forEach((el, i) => {
+                        if (el.id === idToDeleteGirl) this.girlsList.splice(i, 1)
+                    })
+
+                    this.buttonStatus = null
+                    this.selectedBoy = null
+                    this.selectedGirl = null
+                },
+
+            },
+
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>

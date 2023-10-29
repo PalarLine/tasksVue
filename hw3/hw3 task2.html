@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>TEST 2</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin: 0 10px;
+        }
+
+        .wrapper {
+            width: 350px;
+            margin: 15px auto;
+        }
+
+        .section_1>h2 {
+            color: green;
+        }
+
+        .section_2>h2 {
+            color: red;
+        }
+
+        .section_2>div {
+            border: 2px solid red;
+        }
+
+        .models_title_filter,
+        .year_of_manufacture_filter {
+            padding: 5px;
+        }
+
+        .filter {
+            display: flex;
+            justify-content: space-around;
+            border: 2px solid green;
+            height: 120px;
+        }
+
+        .filter>div>label,
+        .cars_list {
+            color: green;
+            margin: 3px;
+        }
+
+        .select {
+            cursor: pointer;
+            padding: 2px 5px;
+            border: 2px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Задача 8. Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з
+        використанням
+        випадаючого списку (контент цих випадаючих списків сформувати у залежності від переданого списку).</div>
+    <div id="app">
+        <div class="wrapper">
+            <div class="section_1">
+                <h2>фільтрування</h2>
+
+                <div class="filter">
+
+                    <div class="models_title_filter">
+                        <label>Mарка</label>
+                        <select class="select" name="model" v-model="selectedModel">
+                            <option class="option" v-for="model in createModelsList">
+                                {{ model }}
+
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="year_of_manufacture_filter">
+                        <label>Рік випуску</label>
+                        <select class="select" name="year" v-model="selectedYear">
+                            <option class="option" v-for="year in createYearsList">
+                                {{ year }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="section_2">
+                <h2>список</h2>
+                <div>
+                    <div v-if="filterModelsList.length">
+                        <div class="cars_list" v-for="car in filterModelsList">
+                            {{ car.model }} -
+                            {{ car.yearOfManufacture }}р. -
+                            {{ car.price }}$
+                        </div>
+                    </div>
+                    <div v-else>Немає збігів із заданими параметрами </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        const app = createApp({
+            data() {
+                return {
+                    carsList: [{
+                        id: 1,
+                        model: 'Audi',
+                        yearOfManufacture: 2000,
+                        price: 3000,
+                    },
+                    {
+                        id: 2,
+                        model: 'Mersedes',
+                        yearOfManufacture: 2013,
+                        price: 7000,
+                    },
+                    {
+                        id: 3,
+                        model: 'Opel',
+                        yearOfManufacture: 2019,
+                        price: 10000,
+                    },
+                    {
+                        id: 1,
+                        model: 'Opel',
+                        yearOfManufacture: 2000,
+                        price: 2000,
+                    },
+                    {
+                        id: 1,
+                        model: 'Nissan',
+                        yearOfManufacture: 2010,
+                        price: 3000,
+                    }],
+                    selectedModel: null,
+                    selectedYear: null,
+                }
+            },
+            computed: {
+                createModelsList() {
+                    this.modelsList = new Set()
+                    this.carsList.forEach(element => {
+                        this.modelsList.add(element.model)
+                    });
+                    return this.modelsList
+                },
+
+                createYearsList() {
+                    this.yearsList = new Set()
+
+                    this.carsList.forEach(element => {
+                        this.yearsList.add(element.yearOfManufacture)
+                    });
+                    return this.yearsList
+                },
+
+                filterModelsList() {
+
+                    let filteredCars
+                    if (!this.selectedModel && !this.selectedYear)
+                        return this.carsList
+
+                    else if (this.selectedModel && !this.selectedYear)
+                        return (filteredCars = this.carsList.filter((car) =>
+                            car.model === this.selectedModel))
+                    else if (!this.selectedModel && this.selectedYear)
+                        return filteredCars = this.carsList.filter((car) =>
+                            car.yearOfManufacture == this.selectedYear)
+                    else
+                        filteredCars = this.carsList.filter(
+                            (car) => car.model === this.selectedModel && car.yearOfManufacture == this.selectedYear
+                        )
+                    return filteredCars
+                }
+            },
+
+
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>

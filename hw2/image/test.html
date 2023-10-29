@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <Div><input type="text">
+        <button onclick="clickMe()">clickMe</button>
+        <p id="lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus consequatur cumque minus vero
+            ducimus tempora suscipit quibusdam vitae similique, ipsam odio assumenda autem ullam dolorem, officia alias
+            tempore laborum voluptate?</p>
+    </Div>
+
+    <script>
+        const obj1 = [
+            {
+                id: 1,
+                title: 'one',
+
+            },
+            {
+                id: 2,
+                title: 'two',
+
+            },
+            {
+                id: 3,
+                title: 'three',
+
+            }
+        ]
+        const obj2 = []
+        console.log(obj2)
+
+        function clickMe() {
+            //document.getElementById('lorem').style.color = "red"
+            obj2.push(obj1.find((item) => item.title))
+
+        }
+        console.log(obj2)
+
+
+      //fieldsListInTotal.push(fieldsListInActive.find((item) => item.field === 'id'));
+
+    </script>
+
+</body>
+
+</html>

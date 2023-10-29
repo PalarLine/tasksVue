@@ -37,6 +37,16 @@ button {
 button:hover {
   color: white;
 }
+.checked {
+  color: white;
+}
+.checked::after {
+  content: " - перевірено";
+}
+.ready::after {
+  content: " - готове до перевірки";
+}
+
 .container {
   margin: 0 auto;
   width: 70vw;
@@ -70,6 +80,6 @@ button:hover {
   display: none;
   background: rgb(0, 255, 136);
 }
-#hidden2 {
+.hidden {
   display: none;
 }

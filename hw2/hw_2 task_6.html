@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Task 6</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        h3 {
+            margin: 0 auto;
+            font-size: 15px;
+        }
+
+
+        button {
+            width: 130px;
+            height: 25px;
+            border: 0.5px solid gray;
+            border-radius: 10px;
+            margin: 0px 20px;
+        }
+
+        input {
+            margin: 20px;
+        }
+
+        .wrapper {
+            border: 1px solid black;
+            min-width: 800px;
+        }
+
+
+        .process {
+            display: flex;
+            justify-content: space-around;
+            margin: 5px;
+
+        }
+
+        .order {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            min-width: 800px;
+
+        }
+
+        .ordered,
+        .prepearing,
+        .done {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 5px;
+            width: 30vw;
+            border: 1px solid black;
+            min-width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- На кухню поступають замовлення. Спочатку ми додаємо їх у список “Очікують на виконання”, якщо повар береться робити —
+    замовлення переходить у список “Виконуються”, якщо замовлення виконано — переходить у список “Готові до виносу”. Якщо
+    натиснути на “Подано” - страва зникає з таблиці -->
+    <div id="app">
+        <div class="wrapper">
+            <div class="order">
+                <h2>Нова замовлена страва</h2>
+                <label>
+                    <input type="text" v-model.trim="mealTitle">
+                </label>
+                <button @click="onMealAdd">Додати</button>
+            </div>
+
+            <div class="process">
+                <div class="ordered">
+                    <h3>Очікують на виконання</h3>
+                    <div class="process" v-for="(meal, index) in waitingList" :key="index">
+                        <div>
+                            <span>{{meal.title}}</span>
+                        </div>
+                        <div>
+                            <button @click="onProcessing(index)">Готувати</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="prepearing">
+                    <h3>Виконуються</h3>
+                    <div class="process" v-for="(meal, index) in processingList" :key="index">
+                        <div>
+                            <span>{{meal.title}}</span>
+                        </div>
+                        <div>
+                            <button @click="onCompleted(index)">Приготовлено</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="done">
+                    <h3>Готові до виносу</h3>
+                    <div class="process" v-for="(meal, index) in completedList" :key="index">
+                        <div>
+                            <span>{{meal.title}}</span>
+                        </div>
+                        <div>
+                            <button @click="onExecute(index)">Подано</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue
+        const app = createApp({
+            data() {
+                return {
+                    mealTitle: null,
+                    id: 0,
+                    waitingList: [],
+                    processingList: [],
+                    completedList: [],
+
+                }
+            },
+            methods: {
+                onMealAdd() {
+                    if (this.mealTitle !== null) {
+                        this.id++
+                        this.waitingList.push({
+                            id: this.id,
+                            title: this.mealTitle
+                        })
+                    }
+                    this.mealTitle = null
+                },
+
+                onProcessing(index) {
+                    this.processingList.push(this.waitingList[index])
+                    this.waitingList.splice(index, 1)
+
+                },
+
+                onCompleted(index) {
+                    this.completedList.push(this.processingList[index])
+                    this.processingList.splice(index, 1)
+                },
+                onExecute(index) {
+                    this.completedList.splice(index, 1)
+
+                }
+            }
+
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>
