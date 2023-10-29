@@ -1,4 +1,5 @@
 
+
 function openTasks(index) {
         let elem = document.getElementById('tasks' + index)
         let display = elem.style.display
