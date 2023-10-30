@@ -62,7 +62,7 @@
                 <input type="text" v-model.trim="userAnswer">
             </label>
 
-            <button @click="isAnswerCorrect()">перевірити</button>
+            <button @click="isAnswerCorrect">перевірити</button>
 
             <div>
                 {{ messageToUser }}
@@ -88,28 +88,25 @@
                     answerIsCorrect: null,
                     userAnswer: null,
                     messageToUser: null,
-                    picture: null,
-                    wordInEnglish: null,
-
                 }
             },
 
             computed: {
 
                 statusClassesForAnswer() {
-                    let currentStatus
+
                     if (this.answerIsCorrect)
-                        return currentStatus = "borderGreen"
+                        return "borderGreen"
                     else if (this.answerIsCorrect === false)
                         return currentStatus = "borderRed"
                 },
 
                 loadPicture() {
-                    return this.picture = dictionary.image
+                    return dictionary.image
                 },
 
                 loadWord() {
-                    return this.wordInEnglish = dictionary.word
+                    return dictionary.word
                 }
             },
 

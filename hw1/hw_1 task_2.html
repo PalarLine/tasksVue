@@ -27,19 +27,27 @@
         <input type="number" v-model.lazy="enteredMonthNumber" min="1" max="12" />
       </label>
     </div>
-    <div>
-      The season is:
-      <span> {{ theSeasonIs }} </span>
-    </div>
-    <div>
-      Our recomendations:
-      <span>{{ theRecomendationIs }}</span>
-    </div>
-    <div class="show_picture">
-      Picture:
-      <img :src="thePictureIs">
+
+    <div v-if="theSeasonIs">
+
+      <div>
+        The season is:
+        <span> {{ theSeasonIs.monthName }} </span>
+      </div>
+
+      <div>
+        Our recomendations:
+
+        <span>{{ theSeasonIs.recommended }}</span>
+      </div>
+
+      <div class="show_picture">
+        Picture:
+        <img :src="theSeasonIs.img">
+      </div>
 
     </div>
+
   </div>
 
   <script>
@@ -82,21 +90,25 @@
 
       computed: {
         theSeasonIs() {
-          for (const item of seasonsList)
-            if (item.monthNumber.includes(this.enteredMonthNumber))
-              return item.monthName
-        },
-        theRecomendationIs() {
-          for (const item of seasonsList)
-            if (item.monthNumber.includes(this.enteredMonthNumber))
-              return item.recommended
-        },
-        thePictureIs() {
-          for (const item of seasonsList)
-            if (item.monthNumber.includes(this.enteredMonthNumber))
-              return item.img
 
+          const selectedSeason = seasonsList.find((season) =>
+            season.monthNumber.includes((this.enteredMonthNumber))
+          );
+          return selectedSeason ? selectedSeason : null;
         },
+
+        // for (const item of seasonsList) {
+        //   if (item.monthNumber.includes(this.enteredMonthNumber)) {
+        //     return [{
+        //       name: item.monthName,
+        //       recomend: item.recommended,
+        //       picture: item.img
+        //     }]
+        //   }
+
+        // }
+
+        //},
       },
     })
     app.mount('#app')

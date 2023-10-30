@@ -21,7 +21,7 @@
     <div>
       <label>
         Enter the Password:
-        <input type="text" @focus="onFocus" v-model.trim="userPassword">
+        <input type="password" @focus="onFocus" v-model.trim="userPassword">
       </label>
     </div>
     <div>
@@ -53,10 +53,7 @@
           userLogin: null,
           userPassword: null,
           message: null,
-          // messageLogin: null,
-          // messagePassword: null,
           isEnteredDataValid: null
-
         }
       },
 
@@ -69,7 +66,6 @@
 
       methods: {
         isDataValid() {
-
           const enteredLogin = this.userLogin.toUpperCase()
           return usersList.some(
             (user) =>
@@ -79,16 +75,11 @@
         },
 
         showMessage() {
-          //this.isEnteredDataValid = this.isDataValid()
           if (this.isDataValid())
-            //&& this.isPasswordValid())
             this.message = true
           else this.message = false
-          //else this.message = false
-
         },
         onFocus() {
-
           this.message = null
         }
       },

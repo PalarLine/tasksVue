@@ -93,24 +93,22 @@
           return (this.balance / EURO_RATE).toFixed(2)
         },
         currentStatusDollarClass() {
-          let currentDollarClass = null
           return this.dollarValue < 100
-            ? currentDollarClass = "isLessThan_100"
-            : currentDollarClass = "isMoreThan_100"
+            ? "isLessThan_100"
+            : "isMoreThan_100"
         },
         currentStatusEuroClass() {
-          let currentEuroClass = null
           return this.euroValue < 100
-            ? currentEuroClass = "isLessThan_100"
-            : currentEuroClass = "isMoreThan_100"
+            ? "isLessThan_100"
+            : "isMoreThan_100"
         },
         curretnStatusBalanceClass() {
-          let currentBalanceClass = null
+
           if (this.withdrawMoney > 0) {
-            return currentBalanceClass = 'isWithdraw'
+            return 'isWithdraw'
           } else
             if (this.addMoney > 0) {
-              return currentBalanceClass = 'isAdd'
+              return 'isAdd'
             }
 
         }

@@ -45,7 +45,7 @@
             <div>
                 <label>
                     Enter Password:
-                    <input type=" text" v-model.trim="password" @focus="onFocus">
+                    <input type=" password" v-model.trim="password" @focus="onFocus">
                 </label>
             </div>
             <div>
@@ -107,7 +107,7 @@
 
                 isIvanStatusColor() {
                     if (this.login !== null)
-                        return this.login.toLocaleUpperCase() === "IVAN"
+                        return this.login.toLocaleUpperCase() === "IVAN" ? true : false
                 },
             },
             methods: {

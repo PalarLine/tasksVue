@@ -13,8 +13,8 @@
     <!-- Вивести список як маркований список з елементами у форматі (name: salary) -->
     <div id="app">
         <div class="wrapper">
-            <ul v-for="worker in workers" :key="workers.id">
-                <li> {{worker.name}} : {{worker.salary}} </li>
+            <ul>
+                <li v-for="worker in workers" :key="workers.id"> {{worker.name}} : {{worker.salary}} </li>
             </ul>
         </div>
     </div>
