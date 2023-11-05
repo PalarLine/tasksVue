@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<laptop-panel
+:laptop-list="notebooksList" />
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LaptopPanel from "./components/LaptopPanel.vue";
+import { notebooksList } from "./constants/3_data_notebooks"
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
-  }
+    LaptopPanel,
+  },  
+
+  data() {
+    return {
+      notebooksList,
+    }
+  },
+  
+  
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
