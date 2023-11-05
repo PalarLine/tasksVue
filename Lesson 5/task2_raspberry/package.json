@@ -1,5 +1,5 @@
 {
-  "name": "task3_laptops",
+  "name": "task2_raspberry",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -39,7 +39,5 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ],
-  "_id": "task3_laptops@0.1.0",
-  "readme": "ERROR: No README data found!"
+  ]
 }
