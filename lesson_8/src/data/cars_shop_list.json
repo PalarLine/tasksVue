@@ -1,0 +1,136 @@
+[
+    {   
+        "id": "1",
+        "type": "Car",
+        "bodytype": "Sedan",
+        "brand": "Alfa Romeo",
+        "model": "Spider",
+        "manufactured": "1986",
+        "price": "7800",        
+        "image": " https://i.ebayimg.com/images/g/RcsAAOSw8ztlam1T/s-l1600.jpg"
+
+    },
+    {
+        "id": "3",
+        "type": "Car",
+        "bodytype": "Wagon",
+        "brand": "BMW",
+        "model": "5-Series",
+        "manufactured": "2001",
+        "price": "3650",        
+        "image": "https://i.ebayimg.com/images/g/f1wAAOSwcw1lCgNt/s-l960.jpg"
+
+    },
+    {
+        "id": "4",
+        "type": "Car",
+        "bodytype": "Sedan",
+        "brand": "Chrysler",
+        "model": "Imperial",
+        "manufactured": "1931",
+        "price": "100000",        
+        "image": "https://i.ebayimg.com/images/g/ua4AAOSwgJljH-M1/s-l1600.jpg"
+
+    },
+    {
+        "id": "5",
+        "type": "Car",
+        "bodytype": "Coupe",
+        "brand": "Audi",
+        "model": "R8",
+        "manufactured": "2017",
+        "price": "130000",        
+        "image": "https://i.ebayimg.com/images/g/G9AAAOSwGyFldJsD/s-l960.jpg"
+
+    },
+    {
+        "id": "6",
+        "type": "Car",
+        "bodytype": "Sedan",
+        "brand": "Audi",
+        "model": "A6",
+        "manufactured": "2018",
+        "price": "7800",        
+        "image": " https://i.ebayimg.com/images/g/Fl4AAOSwHZ9lejfC/s-l1600.jpg"
+
+    },
+    {
+        "id": "7",
+        "type": "Car",
+        "bodytype": "Sport",
+        "brand": "Subaru",
+        "model": "Outback",
+        "manufactured": "2023",
+        "price": "33000",        
+        "image": "https://i.ebayimg.com/images/g/EjUAAOSwUS1leuf0/s-l1600.jpg"
+
+    },
+    {
+        "id": "8",
+        "type": "Truck",
+        "bodytype": "Commercial",
+        "brand": "Volvo",
+        "model": "Pickup",
+        "manufactured": "1996",
+        "price": "4000",        
+        "image": "https://i.ebayimg.com/images/g/xuEAAOSwnGJlg1NB/s-l1600.jpg"
+
+    },
+    {
+        "id": "9",
+        "type": "Car",
+        "bodytype": "Sedan",
+        "brand": "Volvo",
+        "model": "S60",
+        "manufactured": "2019",
+        "price": "22000",        
+        "image": "https://i.ebayimg.com/images/g/7UEAAOSwRTxlekfX/s-l1600.jpg"
+
+    },
+    {
+        "id": "10",
+        "type": "Truck",
+        "bodytype": "Commercial",
+        "brand": "Chevrolet",
+        "model": "Pickup",
+        "manufactured": "2021",
+        "price": "45000",        
+        "image": "https://i.ebayimg.com/images/g/cCcAAOSwGbpld335/s-l1600.jpg"
+
+    },
+    {
+        "id": "11",
+        "type": "Truck",
+        "bodytype": "Commercial",
+        "brand": "Ford",
+        "model": "Transit",
+        "manufactured": "2018",
+        "price": "25000",        
+        "image": "https://i.ebayimg.com/images/g/TbMAAOSw7vBlMCac/s-l1600.jpg"
+
+    },
+    {
+        "id": "12",
+        "type": "Car",
+        "bodytype": "Sport",
+        "brand": "Nissan",
+        "model": "Skyline",
+        "manufactured": "1998",
+        "price": "25000",        
+        "image": "https://i.ebayimg.com/images/g/IKoAAOSw2zVld12-/s-l1600.jpg"
+
+    },
+    {
+        "id": "13",
+        "type": "Car",
+        "bodytype": "Wagon",
+        "brand": "Nissan",
+        "model": "Armada",
+        "manufactured": "2018",
+        "price": "10500",        
+        "image": "https://i.ebayimg.com/images/g/k3IAAOSwZN5lZx73/s-l1600.jpg"
+
+    }
+]
+
+
